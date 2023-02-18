@@ -14,6 +14,25 @@ public class GaussSeidelMethod {
         }
     }
 
+    public void convergence(double[][] matrix) {
+        int size = matrix.length;
+        Double max = Double.NEGATIVE_INFINITY;
+        for (int i = 0; i < size; i++) {
+            double localMax = 0.0;
+            for (int j = 0; j < size; j++) {
+                localMax += Math.abs(matrix[j][i]);
+            }
+            localMax -= 1;
+            if (localMax > max){
+                max = localMax;
+            }
+        }
+        if (max > 1){
+            System.out.println("Норма матрицы больше 1, условие сходимости не выполняется");
+            System.exit(0);
+        }
+    }
+
     public double[][] transformation(double[][] matrix) {
         int size = matrix.length;
         for (int i = 0; i < size; i++) {
@@ -43,7 +62,7 @@ public class GaussSeidelMethod {
         }
         int countOfIterations = 0;
         while (true) {
-            countOfIterations ++;
+            countOfIterations++;
             for (int i = 0; i < size; i++) {
                 double x = 0;
                 for (int j = 0; j < size; j++) {
@@ -59,7 +78,7 @@ public class GaussSeidelMethod {
                     }
                 }
                 x += staticD.get(i);
-                if (Double.isInfinite(x)){
+                if (Double.isInfinite(x)) {
                     System.out.println("Infinity " + countOfIterations);
                     break;
                 }
