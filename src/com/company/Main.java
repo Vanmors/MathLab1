@@ -11,15 +11,24 @@ public class Main {
         int size = 0;
         ArrayList<Double> arrayList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите: 1 - для ввода с консоли; 2 - для чтения файла");
+        System.out.println("Введите: 1 - для ввода с консоли; 2 - для чтения файла; 3 - автоматическое заполнение матрцы");
         int num = scanner.nextInt();
-        while (!(num == 1 || num == 2)) {
+        while (!(num == 1 || num == 2 || num == 3)) {
             System.out.println("Ошибка ввода!");
-            System.out.println("Введите: 1 - для ввода с консоли; 2 - для чтения файла");
+            System.out.println("Введите: 1 - для ввода с консоли; 2 - для чтения файла; 3 - автоматическое заполнение матрцы");
             num = scanner.nextInt();
         }
 
-        if (num == 1) {
+        if (num == 3) {
+            System.out.println("Укажите размерность матрицы: ");
+            size = scanner.nextInt();
+            for (int i = 0; i < size * size + size; i++) {
+                double number = Math.random();
+                arrayList.add(number);
+            }
+        }
+
+        if (num == 2) {
             try {
                 FileInputStream path = new FileInputStream("res/input");
                 DataInputStream inFile = new DataInputStream(path);
@@ -42,13 +51,14 @@ public class Main {
         }
 
 
-        if (num == 2) {
+        if (num == 1) {
             System.out.println("Укажите размерность матрицы: ");
             size = scanner.nextInt();
 
-            if (size == 1)
+            if (size == 1) {
                 System.out.println("Размерность СЛАУ не может быть равна одному");
-            else if (size == 2) {
+                System.exit(0);
+            } else if (size == 2) {
                 System.out.println("Формат ввода: 'a11 a12 b1'");
                 System.out.println("Введите коффициенты через пробел:");
             } else {

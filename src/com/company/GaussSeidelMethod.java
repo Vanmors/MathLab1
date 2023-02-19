@@ -61,6 +61,7 @@ public class GaussSeidelMethod {
             staticD.add(matrix[i][size]);
         }
         int countOfIterations = 0;
+        double max;
         while (true) {
             countOfIterations++;
             for (int i = 0; i < size; i++) {
@@ -82,18 +83,18 @@ public class GaussSeidelMethod {
                     System.out.println("Infinity " + countOfIterations);
                     break;
                 }
-                System.out.println("x: " + x);
+//                System.out.println("x: " + x);
                 xList.add(x);
 
             }
-            double max = Math.abs(xList.get(0) - d.get(0));
+            max = Math.abs(xList.get(0) - d.get(0));
             for (int k = 1; k < xList.size(); k++) {
                 if ((Math.abs(xList.get(k) - d.get(k))) > max) {
                     max = Math.abs(xList.get(k) - d.get(k));
-                    System.out.println("var: " + Math.abs(xList.get(k) - d.get(k)));
+//                    System.out.println("var: " + Math.abs(xList.get(k) - d.get(k)));
                 }
             }
-            System.out.println("max: " + max);
+//            System.out.println("max: " + max);
             if (max < epsilon) {
                 break;
             } else {
@@ -102,6 +103,11 @@ public class GaussSeidelMethod {
                 xList.clear();
             }
         }
+        System.out.println();
+        for (int i = 0; i < size; i++) {
+            System.out.println("x " + " " + d.get(i));
+        }
+        System.out.println("max: " + max);
         System.out.println("Количесво итераций: " + countOfIterations);
     }
 }
